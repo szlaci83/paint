@@ -27,7 +27,15 @@ public class ASearch {
 			ANode currentNode = (ANode) nodes.get(i);
 			if (anode.getEstimatedCost() <= currentNode.getEstimatedCost()){break;}
 		}
+	  /*  char[][] can = anode.actualState.getCanvas();
+	    for (int j=0;j<can.length;j++){
+         	for(int k =0;k<can[0].length;k++){
+    		System.out.print(can[j][k]);
+    	}
+         System.out.println();
+	    }*/
 			nodes.add(i, anode);
+			//System.out.println("node added");
 	} 		
 	
 	protected void expand(List<ANode> open, List<ANode> closed, ANode node) {

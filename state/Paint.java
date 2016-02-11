@@ -75,10 +75,9 @@ public class Paint implements State {
 		int n=paint.length;
 		int	m=paint[0].length;
 		for(int i = 0; i < n; i++){
-			//System.out.println("start");
 			for(int j = 0; j < m; j++){
-				for(int k = 0; k < n; k++){
-					for(int l = 0; l < m; l++){
+				for(int k = n; k >=0 ; k++){
+					for(int l = m; l >=0; l++){
 						if ((i<=k) && (j<=l)){
 						// add operators to paint lines (try to min)
 						if ((i == k ) || (j == l)){
@@ -91,7 +90,7 @@ public class Paint implements State {
 						//	System.out.println("erase");
 						}
 						// add operators to paint squares (try to min)
-						PaintSquare square = new PaintSquare(i,k,j,l);
+						PaintSquare square = new PaintSquare(i,j,k,l);
 					//	System.out.println("sq");
 						temp.add(square);
 					}
@@ -250,8 +249,8 @@ public class Paint implements State {
 	 */
 	public int estimate(){
 		int rightCell = 0;
-		for(int i = 0; i <= n; i++){
-			for(int j = 0; j <= m; j++){
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < m; j++){
 				if (canvas[i][j] == paint[i][j]){
 					rightCell++;
 				}
@@ -270,11 +269,19 @@ public class Paint implements State {
 			EraseCell cell = ((EraseCell) operator);
 			this.canvas[cell.getX()][cell.getY()] = '.';
 		}
-		//PaintLine and PaintSquare can be done the same way...
-		if ((operator instanceof PaintLine) || (operator instanceof PaintSquare)){
+		//PaintLine 
+		if (operator instanceof PaintLine){
 			PaintLine line = ((PaintLine) operator);
 			for(int i = line.getX1(); i <= line.getX2(); i++){
-				for(int j = line.getY1(); i <= line.getY2(); j++){
+				for(int j = line.getY1(); j <= line.getY2(); j++){
+					this.canvas[i][j] = '#';
+				}
+			}
+		}
+		if (operator instanceof PaintSquare){
+			PaintSquare square = ((PaintSquare) operator);
+			for(int i = square.getX1(); i <= square.getX2(); i++){
+				for(int j = square.getY1(); j <= square.getY2(); j++){
 					this.canvas[i][j] = '#';
 				}
 			}
