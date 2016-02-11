@@ -64,18 +64,19 @@ public class PaintLine extends OperatorImp{
 	}
 
 	//TODO check
-	public State applyTo(State state) {
+	public State applyTo(Paint state) {
 		return OperatorImp.applyTo(this, state);
 
 	}
-	//All commands cost 1 
-	public int getCost(State state) {
-		return 1;
+	//commands cost 
+	public int getCost(Paint state) {
+		return Integer.MAX_VALUE - state.howManyCells(this.x1, this.y1, this.x2, this.y2)-
+			state.howManyToPaint(this.x1, this.y1, this.x2, this.y2);
 	}
 
 
 	//TODO check
-	public boolean isApplicableTo(State state) {
+	public boolean isApplicableTo(Paint state) {
 		return OperatorImp.isApplicableTo(this, state);
 	}
 	

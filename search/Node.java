@@ -26,7 +26,7 @@ public class Node {
 	public Node(Paint state){
 		this.actualState = (Paint)state;
 		this.OpsToUse = (ArrayList)((Paint)state).operators();
-		//this.hasznoperatorok = allapot.operators();
+		
 		
 	}
 
@@ -61,11 +61,15 @@ public class Node {
 
 	//prints out the operators leading to the solution
 	public void printPath(PrintStream stream){
-		if (parent!=null) parent.printPath(stream);
+		if (parent!=null && parent.operator!=null){ parent.printPath(stream);}
+		stream.println(this.operator);
+	}
+	/*
+	public void utKiir(PrintStream stream){
+		if (szulo!=null) szulo.utKiir(stream);
 		stream.println(this);
 	}
-
-
+*/
 	public boolean equals(Object o) {
 		return o == this || (o != null && this.getClass().equals(o.getClass()) && actualState.equals(((Node) o).actualState));
 	}
@@ -86,8 +90,8 @@ public class Node {
 	}
 
 	public String toString() {
-		StringBuilder	sb = new StringBuilder(actualState.toString());
-		if (operator != null) sb.append(' ').append(operator);
+		StringBuilder	sb = new StringBuilder(operator.toString());
+		//if (operator != null) sb.append(' ').append(operator);
 		return sb.toString();
 	}
 

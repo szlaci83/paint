@@ -76,27 +76,31 @@ public class Paint implements State {
 		int	m=paint[0].length;
 		for(int i = 0; i < n; i++){
 			for(int j = 0; j < m; j++){
-				for(int k = n; k >=0 ; k++){
-					for(int l = m; l >=0; l++){
+				for(int k = 0; k < n ; k++){
+					for(int l = 0; l < m; l++){
 						if ((i<=k) && (j<=l)){
 						// add operators to paint lines (try to min)
 						if ((i == k ) || (j == l)){
 					 		PaintLine line = new PaintLine(i,k,j,l);
 					 		temp.add(line);
 					 		//System.out.println("line");
-					 	//add operators to erase all the cells
-							EraseCell cell = new EraseCell(i,j);
-							temp.add(cell);
-						//	System.out.println("erase");
+					 		//System.out.println("erase");
 						}
+						if ((i - k == j - l) /*&& (j-l % 2 == 1)*/){
 						// add operators to paint squares (try to min)
 						PaintSquare square = new PaintSquare(i,j,k,l);
 					//	System.out.println("sq");
 						temp.add(square);
+						}
 					}
 					}
 				}
+			
+			//add operators to erase all the cells
+			EraseCell cell = new EraseCell(i,j);
+			temp.add(cell);
 			}
+		//
 		}
 		//create the OPERATORS array
 		OPERATORS = temp.toArray(new Operator[0]);
@@ -160,7 +164,15 @@ public class Paint implements State {
 		this.canvas = canvas;
 	}	
 	
-
+	@Override
+	public String toString() {
+		StringBuilder sb=new StringBuilder();
+	//	for(int gy: ring){
+	//	 sb.append("hhh");
+	//	}
+		return sb.toString();
+	}
+	
 	@Override
 	/** return is the canvas = to  the paint*/
 	public boolean isGoal() {

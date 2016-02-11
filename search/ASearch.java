@@ -26,14 +26,7 @@ public class ASearch {
 		for (i = 0; i < nodes.size(); ++i) {
 			ANode currentNode = (ANode) nodes.get(i);
 			if (anode.getEstimatedCost() <= currentNode.getEstimatedCost()){break;}
-		}
-	  /*  char[][] can = anode.actualState.getCanvas();
-	    for (int j=0;j<can.length;j++){
-         	for(int k =0;k<can[0].length;k++){
-    		System.out.print(can[j][k]);
-    	}
-         System.out.println();
-	    }*/
+		}    
 			nodes.add(i, anode);
 			//System.out.println("node added");
 	} 		
@@ -42,6 +35,13 @@ public class ASearch {
 		while (node.hasMoreChildren()) {
 			ANode child = node.getNextChild();
 			int	index;
+			/*char[][] can = node.actualState.getCanvas();
+		    for (int j=0;j<can.length;j++){
+	         	for(int k =0;k<can[0].length;k++){
+	    		System.out.print(can[j][k]);
+	    	}
+	         System.out.println();
+		    }*/
 			if ( (index = open.indexOf(child)) != -1) {
 				ANode oldNode = open.get(index);
 				if (child.getCost() < oldNode.getCost()) {
@@ -94,9 +94,9 @@ public class ASearch {
          	}
          	System.out.println();
 		}*/
-	   Paint startState = new Paint();
+	    Paint startState = new Paint();
 		ASearch search = new ASearch();
-		Node solution = search.search(startState);
+		ANode solution = search.search(startState);
 		
 		if(solution!=null){
 		       solution.printPath(System.out);

@@ -31,12 +31,29 @@ public class EraseCell extends OperatorImp{
 		this.y = y;
 	}
 	
+	//TODO check
+	public State applyTo(Paint state) {
+		return OperatorImp.applyTo(this, state);
+
+	}
+	//commands cost 2 because you need to draw that cell first
+		public int getCost(Paint state) {
+			return Integer.MAX_VALUE - 2;
+		}
+	//TODO check
+		public boolean isApplicableTo(Paint state) {
+			return OperatorImp.isApplicableTo(this, state);
+		}
+	
+	
+	
+	
 	/**
 	 * Helps to print out the used command at the end of prog
 	 * writes : ERASE_CELL R C 
 	 */
 	public String toString(){
-		return new StringBuilder().append("ERASE_CELL").append(" ").append(x).append(" ").append(y).toString();
+		return new StringBuilder().append("ERASE_CELL").append(" ").append(this.x).append(" ").append(this.y).toString();
 	}
 	
 	@Override

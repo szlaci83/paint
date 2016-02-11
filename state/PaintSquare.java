@@ -93,13 +93,26 @@ public class PaintSquare extends OperatorImp{
 	public void setY2(int y2) {
 		this.y2 = y2;
 	}
-	
+	//TODO check
+	public State applyTo(Paint state) {
+		return OperatorImp.applyTo(this, state);
+
+	}
+	//commands cost 
+		public int getCost(Paint state) {
+			return Integer.MAX_VALUE - state.howManyCells(this.x1, this.y1, this.x2, this.y2)-
+				state.howManyToPaint(this.x1, this.y1, this.x2, this.y2);
+		}
+	//TODO check
+		public boolean isApplicableTo(Paint state) {
+			return OperatorImp.isApplicableTo(this, state);
+		}
 	/**
 	 * Helps to print out the used command at the end of prog
 	 * writes: PAINT_SQUARE R C S
 	 */
 	public String toString(){
-		return new StringBuilder().append("PAINT_SQUARE").append(" ").append(r).append(" ").append(c).append(s).toString();
+		return new StringBuilder().append("PAINT_SQUARE").append(" ").append(this.c).append(" ").append(this.r).append(" ").append(this.s).toString();
 	}
 
 	@Override

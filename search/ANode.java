@@ -1,5 +1,7 @@
 package search;
 
+import java.io.PrintStream;
+
 import search.Operator;
 import state.Paint;
 public class ANode extends Node {
@@ -24,6 +26,15 @@ public class ANode extends Node {
 			return new ANode(next,this,op);
 		}
 	return null;
+	}
+	
+	public void printPath(PrintStream stream){
+		if (parent!=null){ 
+			parent.printPath(stream);
+		}
+		if (this.operator != null){
+		stream.println(this.operator);
+		}
 	}
 	
 	public int getEstimatedCost(){
