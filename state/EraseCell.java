@@ -1,6 +1,10 @@
 package state;
 
-public class EraseCell {
+import search.Operator;
+import search.OperatorImp;
+import search.State;
+
+public class EraseCell extends OperatorImp{
 	//the coordinates of the cell to be erased:
 	private int x;
 	private int y;
@@ -59,4 +63,5 @@ public class EraseCell {
 			return false;
 		return true;
 	}
+
 }

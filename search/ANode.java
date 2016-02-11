@@ -1,26 +1,25 @@
 package search;
 
-import state.Operator;
-import state.Staterep;
-
+import search.Operator;
+import state.Paint;
 public class ANode extends Node {
 
 	protected int estimatedCost;
 	
-	public ANode(Staterep state){
+	public ANode(Paint state){
 		super(state);
 		estimatedCost = state.estimate();
 	}
 	
-	public ANode(Staterep state, Node parent, Operator made){
+	public ANode(Paint state, Node parent, Operator made){
 		super(state, parent, made);
 		estimatedCost = state.estimate();
 	}
 	
 	public ANode getNextChild(){
 		if( hasMoreChildren() ){
-			Operator op = (Operator)hasznoperatorok.remove(0);
-			Staterep next = ((Staterep)this.getState().clone());
+			Operator op = (Operator)OpsToUse.remove(0);
+			Paint next = ((Paint)this.getState().clone());
 			next.apply(op);
 			return new ANode(next,this,op);
 		}
@@ -28,7 +27,7 @@ public class ANode extends Node {
 	}
 	
 	public int getEstimatedCost(){
-		return aktualisAllapot.estimate();
+		return actualState.estimate();
 	}
 
 	public int getEvaluation(){

@@ -1,6 +1,8 @@
 package state;
+import search.OperatorImp;
+import search.State;
 
-public class PaintSquare {
+public class PaintSquare extends OperatorImp{
 	
 	private int r,c,s; //row, column, s  as described in the task  
 	
@@ -138,5 +140,6 @@ public class PaintSquare {
 		if (y2 != other.y2)
 			return false;
 		return true;
-	}	
+	}
+
 }

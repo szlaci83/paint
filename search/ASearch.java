@@ -1,20 +1,24 @@
 package search;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-import state.Staterep;
+import state.Paint;
 
 public class ASearch {
 
-	protected int kiterjesztes;
+	protected int expansion;
 	
-	protected ANode startCsucs(Staterep startstate){
+	protected ANode startNode(Paint startstate){
 		return new ANode(startstate);
 	}
 	
-	protected ANode kivalasztCsucs(List<ANode> nyilt){
-		return nyilt.isEmpty() ? null : nyilt.remove(0);
+	protected ANode chooseNode(List<ANode> open){
+		return open.isEmpty() ? null : open.remove(0);
 	}
 	
 	protected void insertNode(List<ANode> nodes, ANode anode) {
@@ -26,7 +30,7 @@ public class ASearch {
 			nodes.add(i, anode);
 	} 		
 	
-	protected void kiterjeszt(List<ANode> open, List<ANode> closed, ANode node) {
+	protected void expand(List<ANode> open, List<ANode> closed, ANode node) {
 		while (node.hasMoreChildren()) {
 			ANode child = node.getNextChild();
 			int	index;
@@ -48,49 +52,49 @@ public class ASearch {
 		}
 	}
 	
-	protected ANode search(Staterep kezdoallapot) {
-		List<ANode>	nyilt = new ArrayList<ANode>();	
-		List<ANode>	zart = new ArrayList<ANode>();
-		nyilt.add(startCsucs(kezdoallapot));
+	protected ANode search(Paint openState) {
+		List<ANode>	open = new ArrayList<ANode>();	
+		List<ANode>	closed = new ArrayList<ANode>();
+		open.add(startNode(openState));
 		ANode node;
 		
-		while ((node = kivalasztCsucs(nyilt)) != null && ! node.getState().isGoal()) {
-			kiterjeszt(nyilt, zart, node);
-			zart.add(node);
-			novelKiterjesztes();
+		while ((node = chooseNode(open)) != null && ! node.getState().isGoal()) {
+			expand(open, closed, node);
+			closed.add(node);
+			increaseExpansion();
 		}
           
         return node;
 	}
 	
-	public void novelKiterjesztes(){
-		this.kiterjesztes++;
+	public void increaseExpansion(){
+		this.expansion++;
 	}
 	
-	public int getKiterjesztes() {
-		return kiterjesztes;
+	public int getExpansion() {
+		return expansion;
 	}
 	
-	public static void main(String[] args) {
-	
-		 Staterep kezdoallapot = new Staterep();
-		 System.out.print(kezdoallapot.getRing().length);
-		 ASearch search = new ASearch();
-		 
-		 long startTime = System.currentTimeMillis();
-		 
-		 Node megoldas = search.search(kezdoallapot);
-		 
-		 startTime = System.currentTimeMillis() - startTime; 
-	     
-		 if(megoldas!=null){
-	       megoldas.utKiir(System.out);
-	       System.out.println("Kiterjesztések száma: \n" + search.getKiterjesztes());
-	       System.out.println("Valamint : " + startTime +" millisecundum időt vesz igénybe.\n");
-	     }
-	     else{ 
-	    	System.out.print("Nincs megoldás.");
-	     }
+		
+	public static void main(String[] args) {	
+		//char [][] paint = toCharArray("D:\\UNI\\Practice\\java\\Forgatos\\src\\state\\logo.in");
+		/*int n=paint.length;
+		int	m=paint[0].length;
+		 for (int j=0;j<n;j++){
+         	for(int k =0;k<m;k++){
+    		System.out.print(paint[j][k]);
+         	}
+         	System.out.println();
+		}*/
+	   Paint startState = new Paint();
+		ASearch search = new ASearch();
+		Node solution = search.search(startState);
+		
+		if(solution!=null){
+		       solution.printPath(System.out);
+		     }
+		     else{ 
+		    	System.out.print("No solution found");
+		     }
 	}
-
 }

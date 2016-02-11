@@ -7,8 +7,8 @@ import java.util.PriorityQueue;
 import java.util.SortedSet;
 
 /**
- * A <tt>java.util.PriorityQueue</tt> osztályt kiterjesztő osztály, amely a sorba helyezett elemeket egy <tt>java.util.HashMap</tt> objektumban
- * is tárolja, ilyen módon a <tt>contains</tt> metódussal gyorsan vizsgálható, hogy a sorban szerepel-e az adott objektum.
+ * A <tt>java.util.PriorityQueue</tt> osztalyt kiterjesztő osztály, amely a sorba helyezett elemeket egy <tt>java.util.HashMap</tt> objektumban
+ * is tárolja, ilyen modon a <tt>contains</tt> metódussal gyorsan vizsgálható, hogy a sorban szerepel-e az adott objektum.
  */
 public class HashedPriorityQueue<E> extends PriorityQueue<E> {
 
