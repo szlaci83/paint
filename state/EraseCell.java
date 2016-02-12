@@ -38,7 +38,7 @@ public class EraseCell extends OperatorImp{
 	}
 	//commands cost 2 because you need to draw that cell first
 		public int getCost(Paint state) {
-			return Integer.MAX_VALUE - 2;
+			return Integer.MAX_VALUE  - 10;
 		}
 	//TODO check
 		public boolean isApplicableTo(Paint state) {

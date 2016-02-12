@@ -61,8 +61,8 @@ public class Node {
 
 	//prints out the operators leading to the solution
 	public void printPath(PrintStream stream){
-		if (parent!=null && parent.operator!=null){ parent.printPath(stream);}
-		stream.println(this.operator);
+		if (parent!=null) parent.printPath(stream);
+		stream.println(this);
 	}
 	/*
 	public void utKiir(PrintStream stream){
@@ -90,10 +90,12 @@ public class Node {
 	}
 
 	public String toString() {
-		StringBuilder	sb = new StringBuilder(operator.toString());
-		//if (operator != null) sb.append(' ').append(operator);
+		StringBuilder  sb = new StringBuilder(actualState.toString());
+		if (operator != null) sb.append(operator);
 		return sb.toString();
 	}
+
+
 
 	public Paint getState(){
 		return actualState;

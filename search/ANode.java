@@ -13,7 +13,7 @@ public class ANode extends Node {
 		estimatedCost = state.estimate();
 	}
 	
-	public ANode(Paint state, Node parent, Operator made){
+	public ANode(Paint state, ANode parent, Operator made){
 		super(state, parent, made);
 		estimatedCost = state.estimate();
 	}
@@ -29,12 +29,12 @@ public class ANode extends Node {
 	}
 	
 	public void printPath(PrintStream stream){
-		if (parent!=null){ 
+		if (parent!=null){
+			if (this.operator != null){
+			System.out.println(this.operator);
 			parent.printPath(stream);
 		}
-		if (this.operator != null){
-		stream.println(this.operator);
-		}
+	}
 	}
 	
 	public int getEstimatedCost(){
@@ -44,6 +44,4 @@ public class ANode extends Node {
 	public int getEvaluation(){
 		return this.getCost() + this.getEstimatedCost();
 	}
-
-	
 }

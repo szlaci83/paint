@@ -35,13 +35,13 @@ public class ASearch {
 		while (node.hasMoreChildren()) {
 			ANode child = node.getNextChild();
 			int	index;
-			/*char[][] can = node.actualState.getCanvas();
+			char[][] can = node.actualState.getCanvas();
 		    for (int j=0;j<can.length;j++){
 	         	for(int k =0;k<can[0].length;k++){
 	    		System.out.print(can[j][k]);
 	    	}
-	         System.out.println();
-		    }*/
+	           System.out.println();
+		    }
 			if ( (index = open.indexOf(child)) != -1) {
 				ANode oldNode = open.get(index);
 				if (child.getCost() < oldNode.getCost()) {

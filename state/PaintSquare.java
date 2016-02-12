@@ -100,8 +100,7 @@ public class PaintSquare extends OperatorImp{
 	}
 	//commands cost 
 		public int getCost(Paint state) {
-			return Integer.MAX_VALUE - state.howManyCells(this.x1, this.y1, this.x2, this.y2)-
-				state.howManyToPaint(this.x1, this.y1, this.x2, this.y2);
+			return (Integer.MAX_VALUE / 2) - (state.howManyToPaint(this.x1, this.y1, this.x2, this.y2) * 5);
 		}
 	//TODO check
 		public boolean isApplicableTo(Paint state) {

@@ -86,7 +86,7 @@ public class Paint implements State {
 					 		//System.out.println("line");
 					 		//System.out.println("erase");
 						}
-						if ((i - k == j - l) /*&& (j-l % 2 == 1)*/){
+						if ((i - k == j - l) && (((l - j)  % 2) == 1)){
 						// add operators to paint squares (try to min)
 						PaintSquare square = new PaintSquare(i,j,k,l);
 					//	System.out.println("sq");
@@ -234,7 +234,7 @@ public class Paint implements State {
 			return ((x1 == x2) || (y1 == y2))
 					// cells to paint > all cells / 2 
 					//to check if it worth to use the operator 
-					&& ( toPaint > (all / 2));
+					&& ( toPaint > (all/2));
 		}
 		
 		//handle single cell paint as well with PaintSquare command
@@ -248,7 +248,7 @@ public class Paint implements State {
 			
 			// cells to paint > all cells / 2 
 			//to check if it worth to use the operator 
-			return  ( toPaint > (all / 2));				
+			return  !( toPaint < all );				
 		}
 		return false;
 	}

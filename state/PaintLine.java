@@ -60,7 +60,7 @@ public class PaintLine extends OperatorImp{
 	 *    	
 	 **/
 	public String toString(){
-		return new StringBuilder().append("PAINT_LINE").append(" ").append(x1).append(" ").append(y1).append(" ").append(" ").append(x2).append(" ").append(y2).toString();
+		return new StringBuilder().append("PAINT_LINE").append(" ").append(this.x1).append(" ").append(this.y1).append(" ").append(" ").append(this.x2).append(" ").append(this.y2).toString();
 	}
 
 	//TODO check
@@ -70,8 +70,7 @@ public class PaintLine extends OperatorImp{
 	}
 	//commands cost 
 	public int getCost(Paint state) {
-		return Integer.MAX_VALUE - state.howManyCells(this.x1, this.y1, this.x2, this.y2)-
-			state.howManyToPaint(this.x1, this.y1, this.x2, this.y2);
+		return (Integer.MAX_VALUE /2) - (state.howManyToPaint(this.x1, this.y1, this.x2, this.y2) * 5);
 	}
 
 
